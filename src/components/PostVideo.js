@@ -28,7 +28,7 @@ const PostVideo = () => {
           <h1 className="post-video-title">{title}</h1>
           <p className="post-desc">{description}</p>
 
-          <iframe width="540" height="480" src={videoUrl}></iframe>
+          <iframe className="post-video-frame" width="540" height="480" src={videoUrl}></iframe>
         </div>
       )}
     </>
