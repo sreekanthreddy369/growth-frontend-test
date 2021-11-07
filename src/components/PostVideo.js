@@ -7,7 +7,7 @@ const PostVideo = () => {
   const [posts, setPosts] = useContext(PostsContext);
   const { id } = useParams();
   let error;
-  const post = posts.find(p => p.id === id);
+  const post = posts.items.find(p => p.id === id);
   if (!post) error = "The Post does not exists! please try again!";
 
   const videoUrl = `https://www.youtube.com/embed/${get(
