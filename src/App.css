@@ -47,7 +47,17 @@
 .post-video-title {
   font-size: 22px;
 }
-
+.load-more-posts-btn {
+  height:40px;
+  width:150px;
+  text-align: center;
+  margin-top:40px;
+  border:none;
+  border-radius:6px;
+  background-color:#181c70;
+  color:#ffff;
+  font-size: 16px;
+}
 /* Media Queries */
 
 @media screen and (max-width: 800px) {
