@@ -10,7 +10,7 @@ function App() {
   return (
     <PostsProvider>
       <div className="App">
-        <h1> Growth Front end Development Test</h1>
+        <h1> Growth Engineering Front end Development Test</h1>
         <div className="app-container">
           <Router>
             <Switch>

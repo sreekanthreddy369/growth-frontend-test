@@ -7,6 +7,7 @@ import { PostsContext } from "./PostsContext";
 const Posts = () => {
   const [posts, setPosts] = useContext(PostsContext);
   const [pageCount, setPageCount] = useState(1);
+  const [canShowMorePosts, setCanShowMorePosts] = useState(false);
 
   const retrivePosts = (pageToken = null) => {
     const {
@@ -32,10 +33,25 @@ const Posts = () => {
           totalResults
         };
         setPosts(newPostsObject);
+
+        if (
+          newPostsObject.totalResults > 0 &&
+          newPostsObject.items.length < newPostsObject.totalResults
+        ) {
+          setCanShowMorePosts(true);
+        } else {
+          setCanShowMorePosts(false);
+        }
       })
       .catch(err => {
         console.error(err);
-        setPosts([]);
+        const postsData = {
+          items: [],
+          nextPageToken: "",
+          totalResults: 0
+        };
+
+        setPosts(postsData);
       });
   };
 
@@ -49,26 +65,23 @@ const Posts = () => {
     }
   }, [pageCount]);
 
-  const canFetchMoreResults = () => {
-    return posts.totalResults > 0 && posts.items.length <= posts.totalResults
-      ? true
-      : false;
-  };
-
   const loadMorePosts = () => {
-    if (canFetchMoreResults()) {
+    if (canShowMorePosts) {
       setPageCount(pageCount + 1);
     }
   };
 
   return (
     <div>
+      {posts.items.length === 0 ? "There are no Posts to display!" : null}
       {posts.items.map(post => (
         <Post key={post.id} post={post} />
       ))}
 
-      {canFetchMoreResults() ? (
-        <button onClick={loadMorePosts}> Load more posts ...</button>
+      {canShowMorePosts ? (
+        <button className="load-more-posts-btn" onClick={loadMorePosts}>
+          Load More
+        </button>
       ) : null}
     </div>
   );

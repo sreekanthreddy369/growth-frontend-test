@@ -17,9 +17,12 @@ export const formatDate = date => {
     "Dec"
   ];
   date = new Date(date);
-  date = `${date.getDate()} ${
-    months[date.getMonth()]
-  } ${date.getFullYear()}`;
+  date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
 
   return date;
+};
+
+export const generatePostMeta = (date, channelTitle) => {
+  const formattedDate = formatDate(date);
+  return `${channelTitle} • Posted on ${formattedDate}`;
 };
